@@ -1,0 +1,56 @@
+<html lang="en" ng-app="onlineStore">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SnowBoard Store</title>
+     <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./app.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row row-content" ng-controller="MenuController as menuCtrl">
+           <div class="col-xs-8 col-xs-offset-2">     
+               <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" ng-class="{active:menuCtrl.isSelected(1)}">
+                        <a ng-click="menuCtrl.select(1)" aria-controls="all items" role="tab">All items</a>
+                    </li>
+                    <li role="presentation" ng-class="{active:menuCtrl.isSelected(2)}">
+                        <a ng-click="menuCtrl.select(2)" aria-controls="" role="tab">Bikes</a>
+                    </li>
+                    <li role="presentation" ng-class="{active:menuCtrl.isSelected(3)}">
+                        <a ng-click="menuCtrl.select(3)" aria-controls="" role="tab">Components</a>
+                    </li>
+                    <li role="presentation" ng-class="{active:menuCtrl.isSelected(4)}">
+                        <a ng-click="menuCtrl.select(4)" aria-controls="" role="tab">Clothing</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                  <small> Sort by: </small><input type="text" ng-model="sort.items" placeholder="ex: price">
+                    <ul class="media-list tab-pane fade in active">
+                        <li class="media" ng-repeat="item in menuCtrl.items | filter:menuCtrl.filtText | orderBy:sort.items">
+                            <div class="media-left media-middle">
+                                <a href="#">
+                                <img class="media-object img-thumbnail"
+                                 ng-src={{item.image}} alt="Store Product">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h2 class="media-heading">{{item.name}}
+                                 <span class="label label-success">{{item.label}}</span>
+                                 <span class="badge">{{item.price | currency}}</span></h2>
+                                <p>{{item.description}}</p>
+                              <p><small>Category: {{item.category}}</small></p>
+                              <button type="button" class="btn btn-primary pull-right">Add to cart</button>
+                            </div>
+                            <hr/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./bower_components/angular/angular.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
